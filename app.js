@@ -7,15 +7,14 @@ const session = require('express-session');
 const MongoDbStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
-
+const dotenv = require('dotenv').config();
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 const errorController = require('./controllers/error');
 
 const User = require('./models/user');
-const MONGODB_URI =
-  'mongodb+srv://vsaraf:Vsaraf%40334@cluster0.yhpssgy.mongodb.net/shop?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGO_DB_KEY;
 const app = express();
 const store = new MongoDbStore({
   uri: MONGODB_URI,
